@@ -1,0 +1,78 @@
+﻿@model GameShop.Models.GamesListViewModel
+@{
+    Layout = "_GameLayout";
+    ViewData["Title"] = " | Game Catalog";
+    GameGridData current = Model.CurrentRoute;
+    GridData routes = Model.CurrentRoute.Clone();
+}
+
+
+<div class="container">
+    <h2>Current Game Infromation</h2>
+    <table class="table table-striped table-bordered table-sm table-hover">
+        <thead class="table-dark text-white">
+            <tr>
+                <th>
+                    @{
+                        routes.SetSortAndDirection(nameof(Game.Title), current);
+                    }
+                    <a asp-action="List" asp-all-route-data="@routes.ToDictionary()"
+                       class="text-white">Game Title</a>
+                </th>
+                <th>
+                    @{
+                        routes.SetSortAndDirection(nameof(Game.Genre.GenreName), current);
+                    }
+                    <a asp-action="List" asp-all-route-data="@routes.ToDictionary()"
+                       class="text-white">Game Genre</a>
+                </th>
+                <th colspan="2">
+                    @{
+                        routes.SetSortAndDirection(nameof(Game.Publisher.PublisherName), current);
+                    }
+                    <a asp-action="List" asp-all-route-data="@routes.ToDictionary()"
+                       class="text-white">Game Publisher</a>
+                </th>
+
+            </tr>
+        </thead>
+        <tbody>
+            @foreach (Game game in Model.Games)
+            {
+                <tr>
+                    <td>
+                        <a asp-action="Details" asp-route-id="@game.Title" asp-route-slug="@game.Title.Slug()">
+                            @game.Title
+                        </a>
+                    </td>
+                    <td>
+                        <a asp-action="Details" asp-route-id="@game.Title" asp-route-slug="@game.Title.Slug()">
+                            @game.Genre.GenreName
+                        </a>
+                    </td>
+                    <td>
+                        <a asp-action="Details" asp-route-id="@game.Title" asp-route-slug="@game.Title.Slug()">
+                            @game.Publisher.PublisherName
+                        </a>
+                    </td>
+                    <td>
+                        <form asp-controller= "Games" asp-action="Details" asp-route-id="@game.GameId">
+                            <button type="submit" class="btn btn-primary object-fit-cover">Edit</button>
+                        </form>
+                    </td>
+
+                </tr>
+            }
+        </tbody>
+    </table>
+    @{
+        routes = current.Clone();
+        for (int i = 1; i <= Model.TotalPages; i++)
+        {
+            routes.PageNumber = i;
+            string active = @Nav.Active(i, current.PageNumber);
+            <a asp-action="List" asp-all-route-data="@routes.ToDictionary()"
+               class="btn btn-outline-primary @active">@i</a>
+        }
+    }
+</div>

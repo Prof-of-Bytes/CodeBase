@@ -1,0 +1,50 @@
+﻿@using GameShop.Models
+@model GameShop.Models.Game
+
+<!DOCTYPE html>
+<html lang="en-us">
+<head>
+    <title>@ViewBag.Title</title>
+</head>
+<body>
+    <h3>Games</h3>
+    <div>
+        <form asp-controller="Games" asp-action="Create" method="post">
+            <label asp-for="Title" class="form-label" >Game Title</label>
+            <input asp-for="Title" class="form-control"/>
+
+            <label asp-for="GenreId" class="form-label">Genre</label>
+            <select asp-for="GenreId" asp-items="@(new SelectList(
+                    ViewBag.GenreList,"GenreId", "GenreName"))" class="form-select"></select>
+
+            <label asp-for="PublisherId" class="form-label">Publisher</label>
+            <select asp-for="PublisherId" asp-items="@(new SelectList(
+                    ViewBag.PublisherList,"PublisherId", "PublisherName"))" class="form-label"></select>
+
+            <button type="submit" class="form-submit">Add Game</button>
+        </form>
+    </div>
+    <div>
+        <table>
+            <tr>
+                <th>Game Name</th>
+                <th>Genre Type</th>
+                <th>Publisher</th>
+            </tr>
+         
+                @foreach (Game game in ViewBag.GameList)
+                {
+                <tr>
+                    <td>@game.Title</td>
+                    <td>@game.Genre.GenreName</td>
+                    <td>@game.Publisher.PublisherName</td>
+                    
+                </tr>
+                }
+        </table>
+    </div>
+</body>
+</html>
+
+
+
