@@ -1,0 +1,32 @@
+﻿<!DOCTYPE html>
+<html lang="en">
+<head>
+
+@{
+    Layout = "_MainLayout";
+}
+
+
+</head>
+<body>
+<div class="container my-auto border border-1 border-white bg-body-tertiary">
+    <div class="row bg-black">
+        <ul class="nav nav-tabs">
+            <li class="nav-item">
+                <a class="nav-link" asp-controller="Games" asp-action="Create">Create Game</a>
+            </li>
+            <li class="nav-item ">
+                <a class="nav-link" asp-controller="Genre" asp-action="Create">Add a Genre</a>
+            </li>
+            <li class="nav-item ">
+                <a class="nav-link" asp-controller="Publisher " asp-action="Create">Add a Publisher</a>
+            </li>
+            <li class="nav-item ">
+                <a class="nav-link" asp-controller="Games" asp-action="List">Back to Game List</a>
+            </li>
+        </ul>
+    </div>
+    @RenderBody()
+</div>
+</body>
+

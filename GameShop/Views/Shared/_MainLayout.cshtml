@@ -1,0 +1,57 @@
+﻿<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="utf-8" />
+    <meta name="viewport" content="width=device-width" />
+    <link rel="stylesheet" href="~/css/site.css" asp-append-version="true" />
+    <link rel="stylesheet" href="~/TuringsGameShop.styles.css" asp-append-version="true" />
+    <link rel="stylesheet" href="~/bootstrap/css/bootstrap.min.css" asp-append-version="true" />
+</head>
+<body class="bg-dark">
+    <div class="container-lg">
+        <header class="row px-1 my-2 bg-primary-subtle bg-gradient">
+            <nav class="navbar navbar-expand">
+                <div class="col border border-3 border-black fs-3 text-center" style="font-family:Courier New, Courier, monospace">Turing's Game Shop</div>
+                <button class="navbar-toggler" type="button" data-bs-toggle="collapse" data-bs-target="#navbarSupportedContent" aria-controls="navbarSupportedContent" aria-expanded="false" aria-label="Toggle navigation">
+                    <span class="navbar-toggler-icon"></span>
+                </button>
+                <div class="collapase navbar-collapse" id="navbarSupportedContent">
+                    <ul class="col mx-4 nav nav-pills">
+                        <li class="nav-item">
+                            <a class="nav-link active" aria-current="page" asp-controller="Home" asp-action="Index">Home</a>
+                        </li>
+                        <li class="nav-item">
+                            <a class="nav-link" asp-controller="Games" asp-action="List">Games</a>
+                        </li>
+                        <li class="nav-item">
+                            <a class="nav-link" asp-controller="GamesReal" asp-action="Index">Inventory</a>
+                        </li>
+                        <li class="nav-item">
+                            <a class="nav-link" asp-controller="Platforms">Platforms</a>
+                        </li>
+                    </ul>
+                </div>
+                <div>
+                    <form class="col align-content-end">
+                        <button class="btn btn-success" type="submit">Login</button>
+                    </form>
+                </div>
+            </nav>
+        </header>
+        </>
+        <div">
+            @RenderBody()
+        </div>
+
+        <footer class="container border border-3 border-top footer text-white">
+            &copy; 2024 - TuringsGameShop - <a asp-area="" asp-controller="Home" asp-action="Privacy">Privacy</a>
+        </footer>
+    </div>
+    <script src="~/jquery/jquery.min.js"></script>
+    <script src="~/bootstrap/js/bootstrap.min.js"></script>
+    <script src="~/popper.js/cjs/popper.min.js"></script>
+    <script src="~/js/site.js" asp-append-version="true"></script>
+    @await RenderSectionAsync("Scripts", required: false)
+
+</body>
+</html>
