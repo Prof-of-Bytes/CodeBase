@@ -23,6 +23,8 @@ namespace GameShop.Models
         [Column(TypeName = "NVARCHAR(100)")]
         public string Title { get; set; } = string.Empty;
 
+        public string GameSlug  => Title.Slug();
+
         //Many to one
         public ICollection<GameReal> GamesReal { get; set; } = new HashSet<GameReal>();
     }

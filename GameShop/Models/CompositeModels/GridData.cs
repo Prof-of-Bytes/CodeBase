@@ -2,9 +2,9 @@
 {
     public abstract class GridData
     {
-        public int PageNumber { get; set; } = 1;
-        public int PageSize { get; set; } = 4;
-        public string SortDirection { get; set; } = "asc";
+        public int PageNumber { get; set; }
+        public int PageSize { get; set; }
+        public string SortDirection { get; set; } = string.Empty;
         public string SortField { get; set; } = string.Empty;
 
         public int GetTotalPages(int count) => (count + PageSize - 1) / PageSize;
@@ -13,7 +13,7 @@
         {
             SortField = newSortField;
 
-            if (current.SortField.EqualsNoCase(newSortField) && current.SortField == "asc")
+            if (current.SortField.EqualsNoCase(newSortField) && current.SortDirection == "asc")
             {
                 SortDirection = "desc";
             }

@@ -6,7 +6,7 @@ namespace GameShop.Models
     {
         public Expression<Func<T, Object>> OrderBy { get; set; } = null!;
         public Expression<Func<T, bool>> Where { get; set; } = null!;
-        public string OrderByDirection { get; set; } = "asc'"; //default value
+        public string OrderByDirection { get; set; } = string.Empty; //default value
         public int PageNumber { get; set; }
         public int PageSize { get; set; }
 

@@ -21,14 +21,14 @@
                 </th>
                 <th>
                     @{
-                        routes.SetSortAndDirection(nameof(Game.Genre.GenreName), current);
+                        routes.SetSortAndDirection(nameof(Game.Genre), current);
                     }
                     <a asp-action="List" asp-all-route-data="@routes.ToDictionary()"
                        class="text-white">Game Genre</a>
                 </th>
                 <th colspan="2">
                     @{
-                        routes.SetSortAndDirection(nameof(Game.Publisher.PublisherName), current);
+                        routes.SetSortAndDirection(nameof(Game.Publisher), current);
                     }
                     <a asp-action="List" asp-all-route-data="@routes.ToDictionary()"
                        class="text-white">Game Publisher</a>
@@ -41,22 +41,18 @@
             {
                 <tr>
                     <td>
-                        <a asp-action="Details" asp-route-id="@game.Title" asp-route-slug="@game.Title.Slug()">
-                            @game.Title
-                        </a>
+                        @game.Title
+
                     </td>
                     <td>
-                        <a asp-action="Details" asp-route-id="@game.Title" asp-route-slug="@game.Title.Slug()">
-                            @game.Genre.GenreName
-                        </a>
+                        @game.Genre.GenreName
+
                     </td>
                     <td>
-                        <a asp-action="Details" asp-route-id="@game.Title" asp-route-slug="@game.Title.Slug()">
-                            @game.Publisher.PublisherName
-                        </a>
+                        @game.Publisher.PublisherName
                     </td>
                     <td>
-                        <form asp-controller= "Games" asp-action="Details" asp-route-id="@game.GameId">
+                        <form asp-controller="Games" asp-action="Details" asp-route-id="@game.GameId" asp-route-slug="@game.GameSlug">
                             <button type="submit" class="btn btn-primary object-fit-cover">Edit</button>
                         </form>
                     </td>

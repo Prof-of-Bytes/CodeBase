@@ -1,9 +1,10 @@
 ﻿using Microsoft.EntityFrameworkCore;
+using Microsoft.AspNetCore.Identity.EntityFrameworkCore;
 
 
 namespace GameShop.Models
 {
-    public class GameStoreContext : DbContext
+    public class GameStoreContext : IdentityDbContext<GameShopUser>
     {
         //constructor
         public GameStoreContext(DbContextOptions<GameStoreContext> options) : base(options)

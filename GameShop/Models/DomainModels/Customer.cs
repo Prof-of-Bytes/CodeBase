@@ -1,4 +1,5 @@
-﻿using System.ComponentModel.DataAnnotations;
+﻿
+using System.ComponentModel.DataAnnotations;
 using System.ComponentModel.DataAnnotations.Schema;
 
 
@@ -20,6 +21,7 @@ namespace GameShop.Models
 
         [Column(TypeName = "nvarchar(450)")]
         public string? UserIdentity { get; set; } = userIdentity;
+        public GameShopUser CustomerUserLink { get; set; } = null!;
         //From 
         public ICollection<Order> Orders { get; set; } = new HashSet<Order>();
         public ICollection<UserReview> UserReviews { get; set; } = new HashSet<UserReview>();
