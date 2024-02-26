@@ -6,15 +6,8 @@ namespace GameShop.Models
     {
         
 
-<<<<<<< HEAD
-<<<<<<< HEAD
         public static async Task CreateAdminUserAsync(IServiceProvider serviceProvider)
-=======
-        public static async Task CreateAdminUserAsync(IServiceProvider serviceProvider, )
->>>>>>> c0b109c156901a71128da7efbb856131a2a4a2e2
-=======
-        public static async Task CreateAdminUserAsync(IServiceProvider serviceProvider, )
->>>>>>> c0b109c156901a71128da7efbb856131a2a4a2e2
+    
         {
             var roleManager = serviceProvider.GetRequiredService<RoleManager<IdentityRole>>();
             var userManager = serviceProvider.GetRequiredService<UserManager<GameShopUser>>();
