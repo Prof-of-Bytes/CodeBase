@@ -1,0 +1,58 @@
+﻿@model GameShop.Models.GameDetailView
+@{
+    ViewData["Title"] = "View";
+    Layout = "_GameLayout";
+}
+
+<h1>Edit Game</h1>
+
+<h4>Game</h4>
+<hr />
+<div class="container">
+    <form asp-action="EditGame">
+        <div class="row gx-3" asp-validation-summary="ModelOnly" class="text-danger">
+            <input type="hidden" asp-for="Game.GameId" />
+        </div>
+        <div class="row gx-3 form-group mb-3">
+            <div class="col-1">
+                <label class="control-label" asp-for="Game.GenreId">Genre</label>
+            </div>
+            <div class="col-3">
+                <select class="form-select-sm" asp-for="Game.GenreId" asp-items='@new SelectList(Model.Genres,"GenreId","GenreName")'></select>
+            </div>
+            <div class="col">
+                <button class="btn btn-secondary" asp-controller="Genre" asp-action="AddGenre">Add A Genre</button>
+            </div>
+        </div>
+        <div class="row text-danger mb-3" asp-validation-for="Game.GenreId">
+        </div>
+        <div class="row gx-3 form-group mb-3">
+            <div class="col-1">
+                <label class="control-label" asp-for="Game.PublisherId">Publisher</label>
+            </div>
+            <div class="col-3">
+                <select class="form-select-sm" asp-for="Game.PublisherId" asp-items='@new SelectList(Model.Publishers,"PublisherId","PublisherName")'></select>
+            </div>
+            <div class="col">
+                <button class="btn btn-secondary" asp-controller="Publisher" asp-action="AddPublisher">Add A Publisher</button>
+            </div>
+        </div>
+        <div class="row text-danger mb-3" asp-validation-for="Game.PublisherId"></div>
+        <div class="row gx-3 form-group mb-3">
+            <div class="col-1">
+                <label class="control-label" asp-for="Game.Title"></label>
+            </div>
+            <div class="col-3">
+                <input class="form-control" type="text" value="@Model.Game.Title" disbaled readonly />
+            </div>
+            <div class="row text-danger mb-3" asp-validation-for="Game.Title"></div>
+            <div class="col">
+                <input type="submit" value="Save" class="btn btn-primary" />
+            </div>
+            <div class="col">
+                <a asp-action="Index">Back to List</a>
+            </div>
+        </div>
+    </form>
+</div>
+
