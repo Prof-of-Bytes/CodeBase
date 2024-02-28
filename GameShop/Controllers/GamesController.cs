@@ -16,9 +16,10 @@ namespace GameShop.Controllers
             _context = context;
             _gameData = new Repository<Game>(context);
         }
+
         public IActionResult Index() => RedirectToAction("List");
 
-        
+       
         public IActionResult List (int PageNumber=1, int PageSize=4, string SortDirection="asc", string SortField="Title")
         {
             GameGridData tempGrid =
@@ -53,6 +54,7 @@ namespace GameShop.Controllers
             };
             return View(vm);
         }
+        
         public IActionResult Details(int id)
         {
             var game = _context.Games.FirstOrDefault(x => x.GameId == id);

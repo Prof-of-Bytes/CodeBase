@@ -8,6 +8,7 @@ var builder = WebApplication.CreateBuilder(args);
 builder.Services.AddControllersWithViews();
 
 builder.Services.AddDbContext<GameStoreContext>(options => options.UseSqlServer(builder.Configuration.GetConnectionString("GameStoreContext")));
+builder.Services.AddDbContext<GameStoreIdentityContext>(options => options.UseSqlServer(builder.Configuration.GetConnectionString("GameStoreIdentityContext")));
 builder.Services.AddIdentity<GameShopUser, IdentityRole>().AddEntityFrameworkStores<GameStoreContext>().AddDefaultTokenProviders();
 
 var app = builder.Build();
