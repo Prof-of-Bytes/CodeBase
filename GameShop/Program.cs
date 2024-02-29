@@ -8,7 +8,6 @@ var builder = WebApplication.CreateBuilder(args);
 builder.Services.AddControllersWithViews();
 
 builder.Services.AddDbContext<GameStoreContext>(options => options.UseSqlServer(builder.Configuration.GetConnectionString("GameStoreContext")));
-builder.Services.AddDbContext<GameStoreIdentityContext>(options => options.UseSqlServer(builder.Configuration.GetConnectionString("GameStoreIdentityContext")));
 builder.Services.AddIdentity<GameShopUser, IdentityRole>().AddEntityFrameworkStores<GameStoreContext>().AddDefaultTokenProviders();
 
 var app = builder.Build();
@@ -28,6 +27,12 @@ app.UseRouting();
 
 app.UseAuthentication();
 app.UseAuthorization();
+
+var scopeFactory = app.Services.GetRequiredService<IServiceScopeFactory>();
+using(var scope = scopeFactory.CreateScope())
+{
+    await ConfigureIdentity.CreateAdminUserAsync(scope.ServiceProvider);
+}
 
 app.MapControllerRoute(
     name: "paging_sorting",

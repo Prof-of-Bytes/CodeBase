@@ -12,9 +12,10 @@ namespace GameShop.Models
             var roleManager = serviceProvider.GetRequiredService<RoleManager<IdentityRole>>();
             var userManager = serviceProvider.GetRequiredService<UserManager<GameShopUser>>();
 
-            string roleName = null!;
-            string password = null!;
-            string username = null!;
+            string roleName = "StandardUser";
+            string password = "Password1!!";
+            string username = "ritchie.dennis";
+            
 
             if (await roleManager.FindByIdAsync(roleName)==null)
             {

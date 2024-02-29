@@ -4,7 +4,7 @@ using Microsoft.AspNetCore.Identity.EntityFrameworkCore;
 
 namespace GameShop.Models
 {
-    public class GameStoreContext : DbContext
+    public class GameStoreContext : IdentityDbContext
     {
         //constructor
         public GameStoreContext(DbContextOptions<GameStoreContext> options) : base(options)

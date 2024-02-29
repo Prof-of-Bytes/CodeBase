@@ -6,7 +6,7 @@ using Microsoft.EntityFrameworkCore.Migrations;
 namespace GameShop.Migrations
 {
     /// <inheritdoc />
-    public partial class addIdentity : Migration
+    public partial class IdentityAndTableCreation : Migration
     {
         /// <inheritdoc />
         protected override void Up(MigrationBuilder migrationBuilder)
@@ -26,7 +26,7 @@ namespace GameShop.Migrations
                 });
 
             migrationBuilder.CreateTable(
-                name: "Customer",
+                name: "Customers",
                 columns: table => new
                 {
                     CustomerId = table.Column<int>(type: "int", nullable: false)
@@ -38,11 +38,11 @@ namespace GameShop.Migrations
                 },
                 constraints: table =>
                 {
-                    table.PrimaryKey("PK_Customer", x => x.CustomerId);
+                    table.PrimaryKey("PK_Customers", x => x.CustomerId);
                 });
 
             migrationBuilder.CreateTable(
-                name: "Genre",
+                name: "Genres",
                 columns: table => new
                 {
                     GenreId = table.Column<int>(type: "int", nullable: false)
@@ -52,11 +52,11 @@ namespace GameShop.Migrations
                 },
                 constraints: table =>
                 {
-                    table.PrimaryKey("PK_Genre", x => x.GenreId);
+                    table.PrimaryKey("PK_Genres", x => x.GenreId);
                 });
 
             migrationBuilder.CreateTable(
-                name: "Platform",
+                name: "Platforms",
                 columns: table => new
                 {
                     PlatformId = table.Column<int>(type: "int", nullable: false)
@@ -66,11 +66,11 @@ namespace GameShop.Migrations
                 },
                 constraints: table =>
                 {
-                    table.PrimaryKey("PK_Platform", x => x.PlatformId);
+                    table.PrimaryKey("PK_Platforms", x => x.PlatformId);
                 });
 
             migrationBuilder.CreateTable(
-                name: "Publisher",
+                name: "Publishers",
                 columns: table => new
                 {
                     PublisherId = table.Column<int>(type: "int", nullable: false)
@@ -80,7 +80,7 @@ namespace GameShop.Migrations
                 },
                 constraints: table =>
                 {
-                    table.PrimaryKey("PK_Publisher", x => x.PublisherId);
+                    table.PrimaryKey("PK_Publishers", x => x.PublisherId);
                 });
 
             migrationBuilder.CreateTable(
@@ -109,7 +109,8 @@ namespace GameShop.Migrations
                 columns: table => new
                 {
                     Id = table.Column<string>(type: "nvarchar(450)", nullable: false),
-                    CustomerId = table.Column<int>(type: "int", nullable: false),
+                    Discriminator = table.Column<string>(type: "nvarchar(13)", maxLength: 13, nullable: false),
+                    CustomerId = table.Column<int>(type: "int", nullable: true),
                     UserName = table.Column<string>(type: "nvarchar(256)", maxLength: 256, nullable: true),
                     NormalizedUserName = table.Column<string>(type: "nvarchar(256)", maxLength: 256, nullable: true),
                     Email = table.Column<string>(type: "nvarchar(256)", maxLength: 256, nullable: true),
@@ -129,15 +130,15 @@ namespace GameShop.Migrations
                 {
                     table.PrimaryKey("PK_AspNetUsers", x => x.Id);
                     table.ForeignKey(
-                        name: "FK_AspNetUsers_Customer_CustomerId",
+                        name: "FK_AspNetUsers_Customers_CustomerId",
                         column: x => x.CustomerId,
-                        principalTable: "Customer",
+                        principalTable: "Customers",
                         principalColumn: "CustomerId",
                         onDelete: ReferentialAction.Cascade);
                 });
 
             migrationBuilder.CreateTable(
-                name: "Order",
+                name: "Orders",
                 columns: table => new
                 {
                     OrderId = table.Column<int>(type: "int", nullable: false)
@@ -148,17 +149,17 @@ namespace GameShop.Migrations
                 },
                 constraints: table =>
                 {
-                    table.PrimaryKey("PK_Order", x => x.OrderId);
+                    table.PrimaryKey("PK_Orders", x => x.OrderId);
                     table.ForeignKey(
-                        name: "FK_Order_Customer_CustomerId",
+                        name: "FK_Orders_Customers_CustomerId",
                         column: x => x.CustomerId,
-                        principalTable: "Customer",
+                        principalTable: "Customers",
                         principalColumn: "CustomerId",
                         onDelete: ReferentialAction.Cascade);
                 });
 
             migrationBuilder.CreateTable(
-                name: "Game",
+                name: "Games",
                 columns: table => new
                 {
                     GameId = table.Column<int>(type: "int", nullable: false)
@@ -169,17 +170,17 @@ namespace GameShop.Migrations
                 },
                 constraints: table =>
                 {
-                    table.PrimaryKey("PK_Game", x => x.GameId);
+                    table.PrimaryKey("PK_Games", x => x.GameId);
                     table.ForeignKey(
-                        name: "FK_Game_Genre_GenreId",
+                        name: "FK_Games_Genres_GenreId",
                         column: x => x.GenreId,
-                        principalTable: "Genre",
+                        principalTable: "Genres",
                         principalColumn: "GenreId",
                         onDelete: ReferentialAction.Cascade);
                     table.ForeignKey(
-                        name: "FK_Game_Publisher_PublisherId",
+                        name: "FK_Games_Publishers_PublisherId",
                         column: x => x.PublisherId,
-                        principalTable: "Publisher",
+                        principalTable: "Publishers",
                         principalColumn: "PublisherId",
                         onDelete: ReferentialAction.Cascade);
                 });
@@ -270,7 +271,7 @@ namespace GameShop.Migrations
                 });
 
             migrationBuilder.CreateTable(
-                name: "GameReal",
+                name: "GamesReal",
                 columns: table => new
                 {
                     GameRealId = table.Column<int>(type: "int", nullable: false)
@@ -284,23 +285,23 @@ namespace GameShop.Migrations
                 },
                 constraints: table =>
                 {
-                    table.PrimaryKey("PK_GameReal", x => x.GameRealId);
+                    table.PrimaryKey("PK_GamesReal", x => x.GameRealId);
                     table.ForeignKey(
-                        name: "FK_GameReal_Game_GameId",
+                        name: "FK_GamesReal_Games_GameId",
                         column: x => x.GameId,
-                        principalTable: "Game",
+                        principalTable: "Games",
                         principalColumn: "GameId",
                         onDelete: ReferentialAction.Cascade);
                     table.ForeignKey(
-                        name: "FK_GameReal_Platform_PlatformId",
+                        name: "FK_GamesReal_Platforms_PlatformId",
                         column: x => x.PlatformId,
-                        principalTable: "Platform",
+                        principalTable: "Platforms",
                         principalColumn: "PlatformId",
                         onDelete: ReferentialAction.Cascade);
                 });
 
             migrationBuilder.CreateTable(
-                name: "Rating",
+                name: "Ratings",
                 columns: table => new
                 {
                     RatingId = table.Column<int>(type: "int", nullable: false)
@@ -310,17 +311,43 @@ namespace GameShop.Migrations
                 },
                 constraints: table =>
                 {
-                    table.PrimaryKey("PK_Rating", x => x.RatingId);
+                    table.PrimaryKey("PK_Ratings", x => x.RatingId);
                     table.ForeignKey(
-                        name: "FK_Rating_Game_GameId",
+                        name: "FK_Ratings_Games_GameId",
                         column: x => x.GameId,
-                        principalTable: "Game",
+                        principalTable: "Games",
                         principalColumn: "GameId",
                         onDelete: ReferentialAction.Cascade);
                 });
 
             migrationBuilder.CreateTable(
-                name: "UserReview",
+                name: "OrderLines",
+                columns: table => new
+                {
+                    OrderId = table.Column<int>(type: "int", nullable: false),
+                    GameRealId = table.Column<int>(type: "int", nullable: false),
+                    Quantity = table.Column<int>(type: "int", nullable: false),
+                    SubTotal = table.Column<decimal>(type: "decimal(6,2)", precision: 6, scale: 2, nullable: true)
+                },
+                constraints: table =>
+                {
+                    table.PrimaryKey("PK_OrderLines", x => new { x.OrderId, x.GameRealId });
+                    table.ForeignKey(
+                        name: "FK_OrderLines_GamesReal_GameRealId",
+                        column: x => x.GameRealId,
+                        principalTable: "GamesReal",
+                        principalColumn: "GameRealId",
+                        onDelete: ReferentialAction.Cascade);
+                    table.ForeignKey(
+                        name: "FK_OrderLines_Orders_OrderId",
+                        column: x => x.OrderId,
+                        principalTable: "Orders",
+                        principalColumn: "OrderId",
+                        onDelete: ReferentialAction.Cascade);
+                });
+
+            migrationBuilder.CreateTable(
+                name: "UserReviews",
                 columns: table => new
                 {
                     RatingId = table.Column<int>(type: "int", nullable: false),
@@ -331,17 +358,17 @@ namespace GameShop.Migrations
                 },
                 constraints: table =>
                 {
-                    table.PrimaryKey("PK_UserReview", x => new { x.RatingId, x.CustomerId });
+                    table.PrimaryKey("PK_UserReviews", x => new { x.RatingId, x.CustomerId });
                     table.ForeignKey(
-                        name: "FK_UserReview_Customer_CustomerId",
+                        name: "FK_UserReviews_Customers_CustomerId",
                         column: x => x.CustomerId,
-                        principalTable: "Customer",
+                        principalTable: "Customers",
                         principalColumn: "CustomerId",
                         onDelete: ReferentialAction.Cascade);
                     table.ForeignKey(
-                        name: "FK_UserReview_Rating_RatingId",
+                        name: "FK_UserReviews_Ratings_RatingId",
                         column: x => x.RatingId,
-                        principalTable: "Rating",
+                        principalTable: "Ratings",
                         principalColumn: "RatingId",
                         onDelete: ReferentialAction.Cascade);
                 });
@@ -382,7 +409,8 @@ namespace GameShop.Migrations
                 name: "IX_AspNetUsers_CustomerId",
                 table: "AspNetUsers",
                 column: "CustomerId",
-                unique: true);
+                unique: true,
+                filter: "[CustomerId] IS NOT NULL");
 
             migrationBuilder.CreateIndex(
                 name: "UserNameIndex",
@@ -392,38 +420,43 @@ namespace GameShop.Migrations
                 filter: "[NormalizedUserName] IS NOT NULL");
 
             migrationBuilder.CreateIndex(
-                name: "IX_Game_GenreId",
-                table: "Game",
+                name: "IX_Games_GenreId",
+                table: "Games",
                 column: "GenreId");
 
             migrationBuilder.CreateIndex(
-                name: "IX_Game_PublisherId",
-                table: "Game",
+                name: "IX_Games_PublisherId",
+                table: "Games",
                 column: "PublisherId");
 
             migrationBuilder.CreateIndex(
-                name: "IX_GameReal_GameId",
-                table: "GameReal",
+                name: "IX_GamesReal_GameId",
+                table: "GamesReal",
                 column: "GameId");
 
             migrationBuilder.CreateIndex(
-                name: "IX_GameReal_PlatformId",
-                table: "GameReal",
+                name: "IX_GamesReal_PlatformId",
+                table: "GamesReal",
                 column: "PlatformId");
 
             migrationBuilder.CreateIndex(
-                name: "IX_Order_CustomerId",
-                table: "Order",
+                name: "IX_OrderLines_GameRealId",
+                table: "OrderLines",
+                column: "GameRealId");
+
+            migrationBuilder.CreateIndex(
+                name: "IX_Orders_CustomerId",
+                table: "Orders",
                 column: "CustomerId");
 
             migrationBuilder.CreateIndex(
-                name: "IX_Rating_GameId",
-                table: "Rating",
+                name: "IX_Ratings_GameId",
+                table: "Ratings",
                 column: "GameId");
 
             migrationBuilder.CreateIndex(
-                name: "IX_UserReview_CustomerId",
-                table: "UserReview",
+                name: "IX_UserReviews_CustomerId",
+                table: "UserReviews",
                 column: "CustomerId");
         }
 
@@ -446,13 +479,10 @@ namespace GameShop.Migrations
                 name: "AspNetUserTokens");
 
             migrationBuilder.DropTable(
-                name: "GameReal");
+                name: "OrderLines");
 
             migrationBuilder.DropTable(
-                name: "Order");
-
-            migrationBuilder.DropTable(
-                name: "UserReview");
+                name: "UserReviews");
 
             migrationBuilder.DropTable(
                 name: "AspNetRoles");
@@ -461,22 +491,28 @@ namespace GameShop.Migrations
                 name: "AspNetUsers");
 
             migrationBuilder.DropTable(
-                name: "Platform");
+                name: "GamesReal");
 
             migrationBuilder.DropTable(
-                name: "Rating");
+                name: "Orders");
 
             migrationBuilder.DropTable(
-                name: "Customer");
+                name: "Ratings");
 
             migrationBuilder.DropTable(
-                name: "Game");
+                name: "Platforms");
 
             migrationBuilder.DropTable(
-                name: "Genre");
+                name: "Customers");
 
             migrationBuilder.DropTable(
-                name: "Publisher");
+                name: "Games");
+
+            migrationBuilder.DropTable(
+                name: "Genres");
+
+            migrationBuilder.DropTable(
+                name: "Publishers");
         }
     }
 }
