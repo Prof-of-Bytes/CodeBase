@@ -1,9 +1,8 @@
 ﻿using Microsoft.AspNetCore.Http;
 using Microsoft.AspNetCore.Mvc;
 
-namespace GameShop.Controllers
-{
-    [Area("Admin")]
+namespace GameShop.Areas.Anon.Controllers
+{ 
     public class AccountController : Controller
     {
         // GET: AccountController
