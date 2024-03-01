@@ -1,0 +1,37 @@
+﻿<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="utf-8" />
+    <meta name="viewport" content="width=device-width" />
+    <link rel="stylesheet" href="~/css/site.css" asp-append-version="true" />
+    <link rel="stylesheet" href="~/TuringsGameShop.styles.css" asp-append-version="true" />
+    <link rel="stylesheet" href="~/bootstrap/css/bootstrap.min.css" asp-append-version="true" />
+</head>
+<body class="bg-dark">
+    <header class="container">
+        <div class="row justify-content-evenly bg-primary-subtle bg-gradient">
+            <div class="col-4 border border-3 border-black fs-3 text-center" style="font-family:Courier New, Courier, monospace">Turing's Game Shop</div>
+            <div class="col-2">
+                <form>
+                    <button class="btn btn-success" type="submit">Login</button>
+                </form>
+            </div>
+        </div>
+    </header>
+
+    <div>
+        @RenderBody()
+    </div>
+
+    <footer class="container border border-3 border-top footer text-white">
+        &copy; 2024 - TuringsGameShop - <a asp-area="" asp-controller="Home" asp-action="Privacy">Privacy</a>
+    </footer>
+    </div>
+    <script src="~/jquery/jquery.min.js"></script>
+    <script src="~/bootstrap/js/bootstrap.min.js"></script>
+    <script src="~/popper.js/cjs/popper.min.js"></script>
+    <script src="~/js/site.js" asp-append-version="true"></script>
+    @await RenderSectionAsync("Scripts", required: false)
+
+</body>
+</html>

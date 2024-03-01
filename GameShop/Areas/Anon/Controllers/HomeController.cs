@@ -1,7 +1,8 @@
 ﻿using Microsoft.AspNetCore.Mvc;
 
-namespace GameShop.Controllers
+namespace GameShop.Areas.Home.Controllers
 {
+    [Area("Anon")]
     public class HomeController : Controller
     {
         public IActionResult Index()
