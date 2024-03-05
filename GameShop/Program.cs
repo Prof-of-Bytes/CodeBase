@@ -34,20 +34,21 @@ using(var scope = scopeFactory.CreateScope())
     await ConfigureIdentity.CreateAdminUserAsync(scope.ServiceProvider);
 }
 
-app.MapAreaControllerRoute("anon_user", "Anon", "{controller=Home}/{action=Index}/{id?}");
+
 
 app.MapControllerRoute(
     name: "default",
-    pattern: "{controller=Home}/{action=Index}/{id?}/{slug?}");
-
+    pattern: "{controller=Home}/{action=Index}");
 
 app.MapControllerRoute(
     name: "paging_sorting",
-    pattern: "{controller}/{action}/page-{PageNumber}/page-size-{PageSize}/{SortDirection}/sorted-on-{SortField}");
+    pattern: "{controller=Games}/{action=List}/page-{PageNumber}/page-{PageSize}/{SortDirection}/sorted-{SortField}");
+
+
 
 app.MapControllerRoute(
     name: "game_details",
-    pattern: "{controller=Games}/{action=Detials}/{id?}/{slug?}");
+    pattern: "{controller=Games}/{action=Details}/{id?}/{slug?}");
 
 
 

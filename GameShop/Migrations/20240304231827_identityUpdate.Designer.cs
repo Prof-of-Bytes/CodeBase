@@ -12,8 +12,8 @@ using Microsoft.EntityFrameworkCore.Storage.ValueConversion;
 namespace GameShop.Migrations
 {
     [DbContext(typeof(GameStoreContext))]
-    [Migration("20240229213934_IdentityAndTableCreation")]
-    partial class IdentityAndTableCreation
+    [Migration("20240304231827_identityUpdate")]
+    partial class identityUpdate
     {
         /// <inheritdoc />
         protected override void BuildTargetModel(ModelBuilder modelBuilder)
@@ -485,7 +485,7 @@ namespace GameShop.Migrations
                 {
                     b.HasBaseType("Microsoft.AspNetCore.Identity.IdentityUser");
 
-                    b.Property<int>("CustomerId")
+                    b.Property<int?>("CustomerId")
                         .HasColumnType("int");
 
                     b.HasIndex("CustomerId")
@@ -648,9 +648,7 @@ namespace GameShop.Migrations
                 {
                     b.HasOne("GameShop.Models.Customer", "Customer")
                         .WithOne("CustomerUserLink")
-                        .HasForeignKey("GameShop.Models.GameShopUser", "CustomerId")
-                        .OnDelete(DeleteBehavior.Cascade)
-                        .IsRequired();
+                        .HasForeignKey("GameShop.Models.GameShopUser", "CustomerId");
 
                     b.Navigation("Customer");
                 });

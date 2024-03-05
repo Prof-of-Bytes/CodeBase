@@ -12,7 +12,7 @@
         <div class="row justify-content-evenly bg-primary-subtle bg-gradient">
             <div class="col-4 border border-3 border-black fs-3 text-center" style="font-family:Courier New, Courier, monospace">Turing's Game Shop</div>
             <div class="col-2">
-                <form>
+                <form asp-controller="Account" asp-action="Login" method="get">
                     <button class="btn btn-success" type="submit">Login</button>
                 </form>
             </div>
@@ -22,7 +22,7 @@
     <div>
         @RenderBody()
     </div>
-
+    <div>
     <footer class="container border border-3 border-top footer text-white">
         &copy; 2024 - TuringsGameShop - <a asp-area="" asp-controller="Home" asp-action="Privacy">Privacy</a>
     </footer>

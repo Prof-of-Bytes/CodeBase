@@ -1,4 +1,5 @@
 ﻿using GameShop.Models;
+using Microsoft.AspNetCore.Authorization;
 using Microsoft.AspNetCore.Mvc;
 using Microsoft.EntityFrameworkCore;
 
@@ -6,6 +7,8 @@ using Microsoft.EntityFrameworkCore;
 
 namespace GameShop.Controllers
 {
+    [Area("Games")]
+    [Authorize(Roles="Admin")]
     public class GamesController : Controller
     {
         private Repository<Game> _gameData { get; set; }

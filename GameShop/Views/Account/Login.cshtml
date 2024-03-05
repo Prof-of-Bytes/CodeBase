@@ -1,0 +1,24 @@
+﻿
+@{
+    ViewData["Title"] = "View";
+    Layout = "_Layout";
+
+}
+
+<h1>Login</h1>
+<div class="container-md">
+    <form asp-controller="Account" asp-action="Login" method="post">
+        <div class="row">
+        <label for="usernameInput" class="form-control">Username</label>
+        <input type="text" class="form-control" id="usernameInput" />
+        </div>
+        <div class="row">
+        <label for="passInput" class="form-control">Password</label>
+        <input type="password" class="form-control" id="passInput" />
+        </div>
+        <div class="row">
+            <button type="button" class="btn btn-primary">Log in</button>
+        </div>
+    </form>
+</div>
+
