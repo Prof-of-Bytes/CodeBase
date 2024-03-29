@@ -1,0 +1,15 @@
+{
+  "version": "0.2.1",
+  "tasks": [
+    {
+      "taskLabel": "task-GameShop",
+      "appliesTo": "GameShop/GameShop.sln",
+      "type": "launch"
+    },
+    {
+      "taskLabel": "task-CodeBase",
+      "appliesTo": "/",
+      "type": "launch"
+    }
+  ]
+}

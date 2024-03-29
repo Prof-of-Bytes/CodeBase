@@ -1,0 +1,3 @@
+﻿<Project>
+  <Import Project="..\build\TheMerchShop.props" />
+</Project>
